@@ -10,6 +10,7 @@ from pywinauto import keyboard
 
 def run():
     app = Application().start("Zoom.exe")
+    time.sleep(2)
     zoom_window = find_window(title="Zoom - 免费账号")
     MoveWindow(zoom_window, 0, 0, 400, 400)
     SetForegroundWindow(zoom_window)
