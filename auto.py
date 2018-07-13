@@ -1,5 +1,6 @@
 import time
 from pywinauto.findwindows import find_window
+from pywinauto.findbestmatch import find_best_match
 from pywinauto.win32functions import SetForegroundWindow
 from pywinauto.win32functions import MoveWindow
 from pywinauto.application import Application
@@ -32,12 +33,25 @@ def run():
     keyboard.SendKeys('{DOWN}')
     time.sleep(1)
     keyboard.SendKeys('{RIGHT}')
+    time.sleep(1)
+    # 勾选共享电脑声音
+    keyboard.SendKeys('{TAB}')
+    time.sleep(1)
+    keyboard.SendKeys('{SPACE}')
     # 确认分享
-    time.sleep(10)
-    keyboard.SendKeys('{ENTER}')
+    time.sleep(1)
+    share_window = find_window(title='选择一个您想共享的窗口或程序')
+    SetForegroundWindow(share_window)
+    time.sleep(1)
+    keyboard.SendKeys('{TAB}')
+    time.sleep(1)
+    keyboard.SendKeys('{TAB}')
+    time.sleep(1)
+    # 定位到了“开始共享”按钮
+    keyboard.SendKeys('{SPACE}')
 
-    # time.sleep(60 * 30)
-    time.sleep(3)
+    time.sleep(60 * 30)
+    # time.sleep(3)
     # 关闭分享
     # keyboard.SendKeys('%s')
     keyboard.SendKeys('%{F4}')
