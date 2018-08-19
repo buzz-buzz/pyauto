@@ -9,14 +9,9 @@ from pywinauto import keyboard
 
 
 def run():
-    app = Application().start("Zoom.exe")
-    time.sleep(2)
-    zoom_window = find_window(title="Zoom - 免费账号")
-    MoveWindow(zoom_window, 0, 0, 400, 400)
-    SetForegroundWindow(zoom_window)
+    zoom_window = open_zoom()
 
-    movie_window = find_window(title="电影和电视")
-    SetForegroundWindow(movie_window)
+    activate_movie_window()
 
     time.sleep(1)
     SetForegroundWindow(zoom_window)
@@ -52,18 +47,41 @@ def run():
     keyboard.SendKeys('{SPACE}')
 
     time.sleep(60 * 30)
-    # time.sleep(3)
-    # 关闭分享
-    # keyboard.SendKeys('%s')
-    keyboard.SendKeys('%{F4}')
-    time.sleep(1)
-    # 确认关闭分享
-    keyboard.SendKeys('{SPACE}')
+    close_share_window(zoom_window)
+    close_zoom(zoom_window)
+
+
+def close_zoom(zoom_window):
     # 关闭 Zoom
     SetForegroundWindow(zoom_window)
     keyboard.SendKeys('%{F4}')
     time.sleep(1)
     keyboard.SendKeys('{SPACE}')
+
+
+def close_share_window(zoom_window):
+    # time.sleep(3)
+    # 关闭分享
+    # keyboard.SendKeys('%s')
+    SetForegroundWindow(zoom_window)
+    keyboard.SendKeys('%{F4}')
+    time.sleep(1)
+    # 确认关闭分享
+    keyboard.SendKeys('{SPACE}')
+
+
+def activate_movie_window():
+    movie_window = find_window(title="电影和电视")
+    SetForegroundWindow(movie_window)
+
+
+def open_zoom():
+    app = Application().start("Zoom.exe")
+    time.sleep(2)
+    zoom_window = find_window(title="Zoom - 免费账号")
+    MoveWindow(zoom_window, 0, 0, 400, 400)
+    SetForegroundWindow(zoom_window)
+    return zoom_window
 
 
 if __name__ == "__main__":
