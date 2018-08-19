@@ -77,7 +77,7 @@ def activate_movie_window():
 
 def open_zoom():
     app = Application().start("Zoom.exe")
-    time.sleep(2)
+    time.sleep(3)
     zoom_window = find_window(title="Zoom - 免费账号")
     MoveWindow(zoom_window, 0, 0, 400, 400)
     SetForegroundWindow(zoom_window)
